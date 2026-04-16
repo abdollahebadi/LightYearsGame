@@ -37,7 +37,7 @@ FetchContent_Declare(
         ${SFML_LIB_NAME}
         GIT_REPOSITORY https://github.com/SFML/SFML.git
         GIT_TAG 3.0.2
-        GIT_SHALLOW FALSE
+        GIT_SHALLOW TRUE
         EXCLUDE_FROM_ALL
 )
 
@@ -54,8 +54,15 @@ install(TARGETS ${LIGHT_YEAR_GAME_TARGET_NAME}
         RUNTIME DESTINATION bin
 )
 
+# Function to copy the shared libs to the install/bin directory where runpath of the executable is set.
+function(CopyLibToInstallFolder LIB_NAME)
+    install(TARGETS ${LIB_NAME}
+            RUNTIME DESTINATION bin
+            LIBRARY DESTINATION bin
+    )
+endfunction()
+
 # Install SFML shared libraries
-install(TARGETS sfml-graphics sfml-window sfml-system
-        RUNTIME DESTINATION bin
-        LIBRARY DESTINATION bin
-)
+CopyLibToInstallFolder(sfml-graphics)
+CopyLibToInstallFolder(sfml-window)
+CopyLibToInstallFolder(sfml-system)
