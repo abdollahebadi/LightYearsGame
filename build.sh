@@ -1,33 +1,43 @@
 #!/bin/bash
 
-# Default build type
-BUILD_TYPE="build"
+BUILD_DIR="./build"
+DEFAULT_INSTALL_DIR="./install"
 
-# Parse argument
 if [ "$1" == "clean" ]; then
-    BUILD_TYPE="clean"
-fi
-
-# Project root is where this script lives
-PROJECT_ROOT="$(cd "$(dirname "$0")" && pwd)"
-BUILD_DIR="$PROJECT_ROOT/build"
-
-if [ "$BUILD_TYPE" == "clean" ]; then
-    echo "Cleaning build directory..."
+    echo "Cleaning build and install directories..."
     rm -rf "$BUILD_DIR"
+    rm -rf "$DEFAULT_INSTALL_DIR"
     echo "Clean complete."
 fi
 
-# Create build dir if it doesn't exist
 mkdir -p "$BUILD_DIR"
 cd "$BUILD_DIR" || exit
 
-# Configure
+# Ask user for install location
+echo ""
+echo "Where would you like to install the game?"
+echo "Press Enter to use the default: $DEFAULT_INSTALL_DIR"
+read -p "Install path: " USER_INSTALL_DIR
+
+# Use default if user just pressed Enter
+if [ -z "$USER_INSTALL_DIR" ]; then
+    INSTALL_DIR="../$DEFAULT_INSTALL_DIR"
+else
+    INSTALL_DIR="$USER_INSTALL_DIR"
+fi
+
+echo ""
+echo "Installing to: $INSTALL_DIR"
+echo ""
+
 echo "Configuring..."
 cmake ..
 
-# Build
 echo "Building..."
 cmake --build .
 
-echo "Done!"
+echo "Installing..."
+cmake --install . --prefix "$INSTALL_DIR"
+
+echo ""
+echo "Done! Executable is at $INSTALL_DIR/bin/"
