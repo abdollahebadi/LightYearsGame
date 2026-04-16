@@ -28,6 +28,8 @@ set(CMAKE_INSTALL_RPATH "$ORIGIN")
 # tells CMake to use the install RPATH during the build stage as well, otherwise $ORIGIN would only apply during install
 set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
 
+set(FETCHCONTENT_BASE_DIR ${CMAKE_SOURCE_DIR}/_deps)
+
 # The below section for fetching the SFML lib from github and then building it for he project.
 include(FetchContent)
 

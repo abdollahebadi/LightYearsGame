@@ -3,6 +3,12 @@
 
 add_executable(${LIGHT_YEAR_GAME_TARGET_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/framework/Application.cpp
+)
+
+target_include_directories(${LIGHT_YEAR_GAME_TARGET_NAME}
+        PRIVATE
+        ${CMAKE_SOURCE_DIR}
 )
 
 # set the standard for the game target only.
