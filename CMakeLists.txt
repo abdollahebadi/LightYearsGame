@@ -54,7 +54,7 @@ install(TARGETS ${LIGHT_YEAR_GAME_TARGET_NAME}
         RUNTIME DESTINATION bin
 )
 
-# Function to copy the shared libs to the install/bin directory where runpath of the executable is set.
+# Function to copy the shared libs to the install/bin directory where RUNPATH of the executable is set.
 function(CopyLibToInstallFolder LIB_NAME)
     install(TARGETS ${LIB_NAME}
             RUNTIME DESTINATION bin
