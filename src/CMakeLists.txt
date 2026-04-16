@@ -7,8 +7,8 @@ add_executable(${LIGHT_YEAR_GAME_TARGET_NAME}
 )
 
 target_include_directories(${LIGHT_YEAR_GAME_TARGET_NAME}
-        PRIVATE
-        ${CMAKE_SOURCE_DIR}
+        PUBLIC
+        ${CMAKE_SOURCE_DIR}/include
 )
 
 # set the standard for the game target only.

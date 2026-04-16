@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BUILD_DIR="./build"
-DEPS_DIR="./_deps"
+DEPS_DIR="./deps"
 DEFAULT_INSTALL_DIR="./install"
 
 if [ "$1" == "clean-build" ]; then
