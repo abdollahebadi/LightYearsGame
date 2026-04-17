@@ -1,10 +1,30 @@
 // In the name of Allah
 #include "framework/Application.hpp"
+#include <iostream>
 
 namespace LY {
-    Application::Application() : mWindow( sf::VideoMode( { 1000, 600 } ), "Light Years" ) { }
+    Application::Application() :
+    mWindow( sf::VideoMode( { 1000, 600 } ), "Light Years" ),
+    mTargetFrameRate (60.0f),
+    mTick{}
+    { }
+
+    void Application::TickInternal(const float deltaTime) {
+        Tick(deltaTime) ;
+    }
+
+    void Application::RenderInternal() {
+        mWindow.clear() ;
+        Render() ;
+        mWindow.display() ;
+    }
+
 
     void Application::Run() {
+        mTick.restart() ;
+        float accumulatedTime = 0.0f ;
+        float targetDeltaTime = 1.0f / mTargetFrameRate ;
+
         while ( mWindow.isOpen() )
         {
             // We are polling for any event that happens in the context of this window.
@@ -15,8 +35,31 @@ namespace LY {
                 if ( event->is<sf::Event::Closed>() )
                     mWindow.close(); // This should change the state of the window to close.
             }
+
+            accumulatedTime += mTick.restart().asSeconds() ;
+            while (accumulatedTime > targetDeltaTime) {
+                accumulatedTime -= targetDeltaTime ;
+                TickInternal(targetDeltaTime) ;
+                RenderInternal() ;
+            }
         }
     }
+
+
+    // =======================================================
+    // Showcase functions implemented here, these must be implemented in the child classes later for the games, we are just
+    // showing how they will be used here.
+    void Application::Tick(float deltaTime) {
+        std::cout << "A tick has happened " << deltaTime <<std::endl ;
+        std::cout << "The target frame rate is: " << mTargetFrameRate << " and we get " << (1.0f / deltaTime) <<std::endl;
+    }
+
+    void Application::Render() {
+        std::cout << "The actual rendering is done here.." << std::endl ;
+    }
+
+
+
 }
 
 
