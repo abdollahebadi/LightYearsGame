@@ -1,6 +1,6 @@
 // In the name of Allah
 #include "framework/Application.hpp"
-#include <iostream>
+#include "framework/Core.h"
 
 namespace LY {
     Application::Application() :
@@ -42,6 +42,7 @@ namespace LY {
                 TickInternal(targetDeltaTime) ;
                 RenderInternal() ;
             }
+
         }
     }
 
@@ -49,14 +50,11 @@ namespace LY {
     // =======================================================
     // Showcase functions implemented here, these must be implemented in the child classes later for the games, we are just
     // showing how they will be used here.
-    void Application::Tick(float deltaTime) {
-        std::cout << "A tick has happened " << deltaTime <<std::endl ;
-        std::cout << "The target frame rate is: " << mTargetFrameRate << " and we get " << (1.0f / deltaTime) <<std::endl;
+    void Application::Tick(const float deltaTime) {
+        LOG("The target frame rate is: %f and we get %f\n", mTargetFrameRate, (1.0f / deltaTime)) ;
     }
 
-    void Application::Render() {
-        std::cout << "The actual rendering is done here.." << std::endl ;
-    }
+    void Application::Render() { }
 
 
 
