@@ -23,7 +23,7 @@ FetchContent_Declare(
         EXCLUDE_FROM_ALL
 )
 
-set(BUILD_SHARED_LIBS ON)
+set(BUILD_SHARED_LIBS OFF)
 FetchContent_MakeAvailable(${SFML_LIB_NAME})
 
 target_link_libraries(${LIGHT_YEARS_ENGINE_TARGET_NAME} PUBLIC SFML::Graphics)
