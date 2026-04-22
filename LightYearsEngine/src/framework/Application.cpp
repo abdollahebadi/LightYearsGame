@@ -1,16 +1,25 @@
 // In the name of Allah
 #include "framework/Application.hpp"
 #include "framework/Core.h"
+#include "framework/World.h"
 
 namespace LY {
     Application::Application() :
     mWindow( sf::VideoMode( { 1000, 600 } ), "Light Years" ),
     mTargetFrameRate (60.0f),
-    mTick{}
+    mTick{},
+    currentWorld(nullptr)
     { }
 
     void Application::TickInternal(const float deltaTime) {
+
         Tick(deltaTime) ;
+
+        if (currentWorld) {
+            currentWorld->BeginWorldInternal() ;
+            currentWorld->ProgressWorldInternal(deltaTime) ;
+        }
+
     }
 
     void Application::RenderInternal() {
@@ -55,8 +64,6 @@ namespace LY {
     }
 
     void Application::Render() { }
-
-
 
 }
 

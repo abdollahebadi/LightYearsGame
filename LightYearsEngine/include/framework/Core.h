@@ -12,7 +12,7 @@ namespace LY {
 
     /** Giving smart pointers aliases, the power of this is not just shortening the code and definition but the
     ability to swap the smart pointer implementation. So if I find the standard smart pointers to be slow and I want
-    to provide my own then I can easily change this alias and my code works. I dont need to search my whole code.
+    to provide my own then I can easily change this alias and my code works. I don't need to search my whole code.
     **/
     template <typename T>
     using unique = std::unique_ptr<T>;

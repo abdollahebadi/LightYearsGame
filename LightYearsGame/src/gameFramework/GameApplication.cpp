@@ -2,10 +2,13 @@
 //
 
 #include "gameFramework/GameApplication.hpp"
-
+#include "framework/World.h"
 
 LY::Application* GetApplication() {
     return new LY::GameApplication();
 }
 
-namespace  LY { }
+LY::GameApplication::GameApplication() {
+    SpawnWorld<World>() ;
+}
+
