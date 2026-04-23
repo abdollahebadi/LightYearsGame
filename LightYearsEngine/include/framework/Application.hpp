@@ -32,7 +32,7 @@ namespace LY {
                 - If false → compilation fails with your message: "worldType must derive from World"
                 - If true → nothing happens, compilation continues normally
             **/
-            static_assert(std::is_base_of<World, WorldType>::value, "worldType must derive from World");
+            static_assert(std::is_base_of_v<World, WorldType>, "WorldType must derive from World");
 
             // you can't use = to assign a raw pointer to a shared_ptr in C++11 and later — it must be direct
             // initialization {} or std::make_shared, so we cannot use: shared<WorldType> newWorld = new WorldType(this) ;

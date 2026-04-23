@@ -15,6 +15,18 @@ void LY::World::BeginWorldInternal() {
 void LY::World::BeginWorld() { LOG("World started..!!") ; }
 
 void LY::World::ProgressWorldInternal(const float deltaTime) {
+
+    // We first progress the state of the elements in the world and then the world itself.
+    for (const auto& actor : pendingActors) {
+        activeActors.push_back(actor) ;
+        actor->BeginActorInternal() ;
+    }
+    pendingActors.clear() ;
+
+    for (const auto& actor : activeActors) {
+        actor->ProgressActorInternal(deltaTime) ;
+    }
+
     ProgressWorld(deltaTime) ;
 }
 
