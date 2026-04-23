@@ -8,7 +8,7 @@ LY::Actor::Actor(World* owningWorld, std::string uid) : owningWorld(owningWorld)
 }
 
 LY::Actor::~Actor() {
-
+   LOG("Actor destroyed") ;
 }
 
 void LY::Actor::BeginActor() {

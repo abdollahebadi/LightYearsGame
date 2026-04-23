@@ -3,12 +3,13 @@
 #pragma once
 
 #include <string>
+#include "framework/Object.h"
 
 namespace LY {
 
     class World ;
 
-    class Actor {
+    class Actor : public Object {
     public:
         Actor(World* owningWorld, std::string uid) ;
         virtual ~Actor();
