@@ -3,8 +3,19 @@
 #include "framework/Actor.h"
 #include "framework/Core.h"
 
-LY::Actor::Actor(World* owningWorld, std::string uid) : owningWorld(owningWorld), actorStarted(false), actorUID(uid) {
-
+LY::Actor::Actor(
+    World* owningWorld,
+    std::string uid,
+    const std::string& texturePath,
+    const int xInitPos,
+    const int yInitPos):
+owningWorld(owningWorld),
+actorStarted(false),
+actorUID(uid),
+acTexture(),
+acSprite(acTexture)
+{
+    SetActorResources(texturePath , xInitPos, yInitPos) ;
 }
 
 LY::Actor::~Actor() {
@@ -28,4 +39,17 @@ void LY::Actor::ProgressActor(const float deltaTime) {
 
 void LY::Actor::ProgressActorInternal(const float deltaTime) {
     ProgressActor(deltaTime) ;
+}
+
+void LY::Actor::SetActorResources(const std::string& texturePath, int xInitPos, int yInitPos) {
+    if (acTexture.loadFromFile(texturePath)) {
+
+        acSprite.setTexture(acTexture) ;
+        acSprite.setTextureRect(sf::IntRect{sf::Vector2i{0, 0}, sf::Vector2i{static_cast<int>(acTexture.getSize().x), static_cast<int>(acTexture.getSize().y)}}) ;
+        acSprite.setPosition(sf::Vector2f{static_cast<float>(xInitPos), static_cast<float>(yInitPos)}) ;
+    }
+}
+
+void LY::Actor::RenderActor(sf::RenderWindow &window) {
+    window.draw(acSprite) ;
 }

@@ -4,9 +4,15 @@
 #include "framework/World.h"
 
 namespace LY {
-    Application::Application() :
-    mWindow( sf::VideoMode( { 1000, 600 } ), "Light Years" ),
-    mTargetFrameRate (60.0f),
+    Application::Application(
+        const unsigned int windowWidth,
+        const unsigned int windowHeight,
+        const std::string& windowTitle,
+        const std::uint32_t style,
+        const float targetFrameRate
+        ) :
+    mWindow( sf::VideoMode( { windowWidth, windowHeight } ), windowTitle, style ),
+    mTargetFrameRate (targetFrameRate),
     mTick{},
     currentWorld(nullptr)
     { }
@@ -63,7 +69,11 @@ namespace LY {
         LOG("The target frame rate is: %f and we get %f\n", mTargetFrameRate, (1.0f / deltaTime)) ;
     }
 
-    void Application::Render() { }
+    void Application::Render() {
+        if (currentWorld) {
+            currentWorld->Render(mWindow) ;
+        }
+    }
 
 }
 

@@ -8,7 +8,13 @@
 namespace LY {
     class Application {
     public:
-        Application() ;
+        Application(
+            unsigned int windowWidth,
+            unsigned int windowHeight,
+            const std::string& windowTitle,
+            std::uint32_t style,
+            float targetFrameRate
+            ) ;
         virtual ~Application() = default ;
         void Run() ;
 

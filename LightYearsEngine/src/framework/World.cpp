@@ -49,4 +49,10 @@ void LY::World::ProgressWorld(const float deltaTime) {
     LOG("World progressed at frame rate: %f", (1.0f/deltaTime) ) ;
 }
 
+void LY::World::Render(sf::RenderWindow &window) {
+    for (auto& actor : activeActors) {
+        actor->RenderActor(window) ;
+    }
+}
+
 LY::World::~World() { }
