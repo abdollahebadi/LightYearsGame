@@ -2,6 +2,7 @@
 
 #include "framework/Actor.h"
 #include "framework/Core.h"
+#include "framework/AppContext.h"
 
 LY::Actor::Actor(
     World* owningWorld,
@@ -12,10 +13,13 @@ LY::Actor::Actor(
 owningWorld(owningWorld),
 actorStarted(false),
 actorUID(uid),
-acTexture(),
-acSprite(acTexture)
+acTexture(AppContext::Assets().getTexture(texturePath)),
+acSprite(*acTexture)
 {
-    SetActorResources(texturePath , xInitPos, yInitPos) ;
+    acSprite.setTextureRect(
+        sf::IntRect{sf::Vector2i{0, 0}, sf::Vector2i{static_cast<int>(acTexture->getSize().x), static_cast<int>(acTexture->getSize().y)}}) ;
+
+    acSprite.setPosition(sf::Vector2f{static_cast<float>(xInitPos), static_cast<float>(yInitPos)}) ;
 }
 
 LY::Actor::~Actor() {
@@ -39,15 +43,6 @@ void LY::Actor::ProgressActor(const float deltaTime) {
 
 void LY::Actor::ProgressActorInternal(const float deltaTime) {
     ProgressActor(deltaTime) ;
-}
-
-void LY::Actor::SetActorResources(const std::string& texturePath, int xInitPos, int yInitPos) {
-    if (acTexture.loadFromFile(texturePath)) {
-
-        acSprite.setTexture(acTexture) ;
-        acSprite.setTextureRect(sf::IntRect{sf::Vector2i{0, 0}, sf::Vector2i{static_cast<int>(acTexture.getSize().x), static_cast<int>(acTexture.getSize().y)}}) ;
-        acSprite.setPosition(sf::Vector2f{static_cast<float>(xInitPos), static_cast<float>(yInitPos)}) ;
-    }
 }
 
 void LY::Actor::RenderActor(sf::RenderWindow &window) {

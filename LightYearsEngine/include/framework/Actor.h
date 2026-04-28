@@ -3,6 +3,8 @@
 #pragma once
 
 #include <string>
+
+#include "Core.h"
 #include "framework/Object.h"
 #include "SFML/Graphics.hpp"
 
@@ -16,9 +18,8 @@ namespace LY {
         virtual ~Actor();
 
         void BeginActorInternal() ;
-        void ProgressActorInternal(float deltaTime) ;
 
-        void SetActorResources(const std::string& texturePath, int xInitPos, int yInitPos) ;
+        void ProgressActorInternal(float deltaTime) ;
 
         void RenderActor(sf::RenderWindow& window) ;
 
@@ -27,7 +28,7 @@ namespace LY {
         bool actorStarted ;
         std::string actorUID ;
 
-        sf::Texture acTexture ;
+        shared<sf::Texture> acTexture ;
         sf::Sprite acSprite ;
 
         virtual void BeginActor() ;

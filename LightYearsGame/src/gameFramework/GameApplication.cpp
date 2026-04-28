@@ -3,6 +3,8 @@
 #include "gameFramework/GameApplication.hpp"
 #include "framework/World.h"
 #include "framework/Actor.h"
+#include "framework/AppContext.h"
+#include "framework/Configs.h"
 
 LY::Application* GetApplication() {
     return new LY::GameApplication(
@@ -19,6 +21,9 @@ LY::GameApplication::GameApplication(
     const std::string& windowTitle,
     const std::uint32_t windowStyle,
     const float targetFrameRate) : Application(windowWidth, windowHeight, windowTitle, windowStyle, targetFrameRate) {
+
+    LY::AppContext::Init(ENVIRONMENT::PROD) ;
+
     const auto firstWorld = SpawnWorld<World>() ;
 
     auto ac4  = firstWorld.lock()->SpawnActor<Actor>(
