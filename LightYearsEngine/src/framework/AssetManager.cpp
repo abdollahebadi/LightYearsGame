@@ -29,5 +29,17 @@ LY::shared<sf::Texture> LY::AssetManager::getTexture(const std::string path) {
     return shared<sf::Texture> {nullptr} ;
 }
 
+void LY::AssetManager::CleanUp() {
+
+    for ( auto iter = loadedTextures.begin() ; iter != loadedTextures.end() ; ) {
+        if (iter->second.use_count() == 1) {
+            iter = loadedTextures.erase(iter) ;
+        }
+        else {
+            ++iter ;
+        }
+    }
+}
+
 
 

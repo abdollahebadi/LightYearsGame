@@ -17,6 +17,8 @@ namespace LY {
 
         shared<sf::Texture> getTexture(std::string path) ;
 
+        void CleanUp() ;
+
     private:
         Dictionary<std::string, shared<sf::Texture>> loadedTextures ;
         void LoadTestEnvironment() ;

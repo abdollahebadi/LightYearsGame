@@ -1,10 +1,9 @@
 // In the name of Allah
 
 #include "framework/World.h"
-
 #include <algorithm>
-
 #include "framework/Core.h"
+#include "framework/AppContext.h"
 
 LY::World::World(Application *owningApp) : owningApp(owningApp) , worldStarted(false) { }
 
@@ -55,4 +54,6 @@ void LY::World::Render(sf::RenderWindow &window) {
     }
 }
 
-LY::World::~World() { }
+LY::World::~World() {
+    LY::AppContext::Assets().CleanUp() ;
+}
