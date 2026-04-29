@@ -14,7 +14,7 @@ namespace LY {
 
     class Actor : public Object {
     public:
-        Actor(World* owningWorld, std::string uid, const std::string& texturePath, int xInitPos, int yInitPos) ;
+        Actor(World* owningWorld, std::string uid, const std::string& texturePath, float xInitPos, float yInitPos) ;
         virtual ~Actor();
 
         void BeginActorInternal() ;
@@ -22,6 +22,23 @@ namespace LY {
         void ProgressActorInternal(float deltaTime) ;
 
         void RenderActor(sf::RenderWindow& window) ;
+
+        void SetActorPosition(sf::Vector2f position) ;
+
+        void SetActorPositionOffset(sf::Vector2f offset) ;
+
+        void SetActorRotation(float degrees) ;
+
+        void SetActorRotationOffset(float offset) ;
+
+        sf::Vector2f GetActorPosition() const ;
+
+        float GetActorRotationInDegrees() const ;
+
+        sf::Vector2f GetActorForwardDirection() const ;
+
+        sf::Vector2f GetActorRightDirection() const ;
+
 
     private:
         World* owningWorld ;
@@ -33,5 +50,6 @@ namespace LY {
 
         virtual void BeginActor() ;
         virtual void ProgressActor(float deltaTime) ;
+        void CenterPivot() ;
     };
 }

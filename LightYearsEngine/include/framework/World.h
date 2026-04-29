@@ -22,7 +22,7 @@ namespace LY {
         virtual ~World() ;
 
         template <typename ActorType>
-        weak<ActorType> SpawnActor(std::string uid, std::string texturePath, int xInitPos, int yInitPos) ;
+        weak<ActorType> SpawnActor(std::string uid, std::string texturePath, float xInitPos, float yInitPos) ;
 
         void Render(sf::RenderWindow& window) ;
 
@@ -41,7 +41,7 @@ namespace LY {
     } ;
 
     template<typename ActorType>
-    weak<ActorType> World::SpawnActor(std::string uid, std::string texturePath, const int xInitPos , const int yInitPos) {
+    weak<ActorType> World::SpawnActor(std::string uid, std::string texturePath, const float xInitPos , const float yInitPos) {
         static_assert(std::is_base_of_v<Actor, ActorType>, "ActorType must derive from Actor");
         shared<ActorType> newActor {new ActorType(this , uid, texturePath, xInitPos, yInitPos)} ;
         pendingActors.push_back(newActor) ;

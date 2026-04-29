@@ -29,18 +29,13 @@ LY::GameApplication::GameApplication(
     auto ac4  = firstWorld.lock()->SpawnActor<Actor>(
         "1",
         "assets/SpaceShooterRedux/PNG/playerShip1_blue.png",
-        0,
-        0) ;
+        100.0f,
+        100) ;
 
     firstWorld.lock()->SpawnActor<Actor>(
         "2" ,
         "assets/SpaceShooterRedux/PNG/playerShip1_green.png",
-        100,
-        100) ;
-
-    // for (int i = 0; i < 100000000; i++) {
-    //
-    // }
-    // ac4.lock()->Destroy() ;
+        200.0f,
+        200.0f) ;
 }
 
