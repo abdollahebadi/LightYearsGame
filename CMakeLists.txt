@@ -1,5 +1,80 @@
 # In the name of Allah
 # This is the top level CmakeLists file for the light year project that I am going with the Udemy tutorial.
+# It should hold the project level configs for all the sub directories
+# This project will consist of two sub directories:
+# 1- Game Logic: This is the main entry point of the game and the logic to manage the game sits here.
+# 2- Game Engine: This will be a static library that will be linked to the game logic target.
+
+#cmake_minimum_required(VERSION 3.28)
+#
+## Declare configs for the project such as name current version and programming languages used
+#project(LightYears VERSION 1.0.0 LANGUAGES C CXX)
+#
+## Enforces the minimum c++ version
+#set(CMAKE_CXX_STANDARD_REQUIRED ON)
+#
+## This disables language extensions to make it compatible in platforms.
+#set(CMAKE_CXX_EXTENSIONS OFF)
+#
+## create a variable in cmake
+#set(LIGHT_YEAR_GAME_TARGET_NAME LightYearsGame)
+#
+## Add this line to redirect all of the executables to the top level build folder, this needs to be added before the
+## add subdirectory clause.
+#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+#
+## Set usage of rpath and run path to false
+#set(CMAKE_SKIP_BUILD_RPATH TRUE)
+#
+## Set $ORIGIN as the RUNPATH using CMake's own variable
+#set(CMAKE_INSTALL_RPATH "$ORIGIN")
+#
+## tells CMake to use the install RPATH during the build stage as well, otherwise $ORIGIN would only apply during install
+#set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
+#
+#set(FETCHCONTENT_BASE_DIR ${CMAKE_SOURCE_DIR}/deps)
+#
+## The below section for fetching the SFML lib from github and then building it for he project.
+#include(FetchContent)
+#
+#set(SFML_LIB_NAME SFML)
+#
+#FetchContent_Declare(
+#        ${SFML_LIB_NAME}
+#        GIT_REPOSITORY https://github.com/SFML/SFML.git
+#        GIT_TAG 3.0.2
+#        GIT_SHALLOW TRUE
+#        EXCLUDE_FROM_ALL
+#)
+#
+## Force All libs to build as shared libraries
+#set(BUILD_SHARED_LIBS ON)
+#
+#FetchContent_MakeAvailable(${SFML_LIB_NAME})
+#
+## add the source sub directory to the build
+#add_subdirectory(src)
+#
+## Install our executable
+#install(TARGETS ${LIGHT_YEAR_GAME_TARGET_NAME}
+#        RUNTIME DESTINATION bin
+#)
+#
+## Function to copy the shared libs to the install/bin directory where RUNPATH of the executable is set.
+#function(CopyLibToInstallFolder LIB_NAME)
+#    install(TARGETS ${LIB_NAME}
+#            RUNTIME DESTINATION bin
+#            LIBRARY DESTINATION bin
+#    )
+#endfunction()
+#
+## Install SFML shared libraries
+#CopyLibToInstallFolder(sfml-graphics)
+#CopyLibToInstallFolder(sfml-window)
+#CopyLibToInstallFolder(sfml-system)
+
+
+### This is the new section
 
 cmake_minimum_required(VERSION 3.28)
 
@@ -13,58 +88,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # create a variable in cmake
-set(LIGHT_YEAR_GAME_TARGET_NAME LightYearGame)
+set(LIGHT_YEARS_GAME_TARGET_NAME LightYearsGame)
+set(LIGHT_YEARS_ENGINE_TARGET_NAME LightYearsEngine)
 
-# Add this line to redirect all of the executables to the top level build folder, this needs to be added before the
-# add subdirectory clause.
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-
-# Set usage of rpath and run path to false
-set(CMAKE_SKIP_BUILD_RPATH TRUE)
-
-# Set $ORIGIN as the RUNPATH using CMake's own variable
-set(CMAKE_INSTALL_RPATH "$ORIGIN")
-
-# tells CMake to use the install RPATH during the build stage as well, otherwise $ORIGIN would only apply during install
-set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
-
-set(FETCHCONTENT_BASE_DIR ${CMAKE_SOURCE_DIR}/deps)
-
-# The below section for fetching the SFML lib from github and then building it for he project.
-include(FetchContent)
-
-set(SFML_LIB_NAME SFML)
-
-FetchContent_Declare(
-        ${SFML_LIB_NAME}
-        GIT_REPOSITORY https://github.com/SFML/SFML.git
-        GIT_TAG 3.0.2
-        GIT_SHALLOW TRUE
-        EXCLUDE_FROM_ALL
-)
-
-# Force All libs to build as shared libraries
-set(BUILD_SHARED_LIBS ON)
-
-FetchContent_MakeAvailable(${SFML_LIB_NAME})
-
-# add the source sub directory to the build
-add_subdirectory(src)
-
-# Install our executable
-install(TARGETS ${LIGHT_YEAR_GAME_TARGET_NAME}
-        RUNTIME DESTINATION bin
-)
-
-# Function to copy the shared libs to the install/bin directory where RUNPATH of the executable is set.
-function(CopyLibToInstallFolder LIB_NAME)
-    install(TARGETS ${LIB_NAME}
-            RUNTIME DESTINATION bin
-            LIBRARY DESTINATION bin
-    )
-endfunction()
-
-# Install SFML shared libraries
-CopyLibToInstallFolder(sfml-graphics)
-CopyLibToInstallFolder(sfml-window)
-CopyLibToInstallFolder(sfml-system)
+# create sub-directories
+add_subdirectory(LightYearsEngine)
+add_subdirectory(LightYearsGame)
