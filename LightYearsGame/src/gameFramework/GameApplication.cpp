@@ -5,6 +5,7 @@
 #include "framework/Actor.h"
 #include "framework/AppContext.h"
 #include "framework/Configs.h"
+#include "spaceship/Spaceship.h"
 
 LY::Application* GetApplication() {
     return new LY::GameApplication(
@@ -26,7 +27,7 @@ LY::GameApplication::GameApplication(
 
     const auto firstWorld = SpawnWorld<World>() ;
 
-    auto ac4  = firstWorld.lock()->SpawnActor<Actor>(
+    firstWorld.lock()->SpawnActor<Actor>(
         "1",
         "assets/SpaceShooterRedux/PNG/playerShip1_blue.png",
         100.0f,
@@ -37,5 +38,12 @@ LY::GameApplication::GameApplication(
         "assets/SpaceShooterRedux/PNG/playerShip1_green.png",
         200.0f,
         200.0f) ;
+
+    firstWorld.lock()->SpawnActor<Spaceship>(
+        "3" , "assets/SpaceShooterRedux/PNG/playerShip1_red.png" ,
+        300 ,
+        600) ;
+
+
 }
 

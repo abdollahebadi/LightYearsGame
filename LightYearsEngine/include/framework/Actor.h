@@ -19,7 +19,7 @@ namespace LY {
 
         void BeginActorInternal() ;
 
-        void ProgressActorInternal(float deltaTime) ;
+        void ProgressInternal(float deltaTime) ;
 
         void RenderActor(sf::RenderWindow& window) ;
 
@@ -49,7 +49,8 @@ namespace LY {
         sf::Sprite acSprite ;
 
         virtual void BeginActor() ;
-        virtual void ProgressActor(float deltaTime) ;
+        virtual void Progress(float deltaTime) ;
+
         void CenterPivot() ;
     };
 }

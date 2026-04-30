@@ -26,7 +26,7 @@ void LY::World::ProgressWorldInternal(const float deltaTime) {
     pendingActors.clear() ;
 
     for (const auto& actor : activeActors) {
-        actor->ProgressActorInternal(deltaTime) ;
+        actor->ProgressInternal(deltaTime) ;
     }
 
     /** Check for any dead actors and remove them
