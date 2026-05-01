@@ -39,6 +39,8 @@ namespace LY {
 
         sf::Vector2f GetActorRightDirection() const ;
 
+    protected:
+        virtual void Progress(float deltaTime) ;
 
     private:
         World* owningWorld ;
@@ -49,7 +51,7 @@ namespace LY {
         sf::Sprite acSprite ;
 
         virtual void BeginActor() ;
-        virtual void Progress(float deltaTime) ;
+
 
         void CenterPivot() ;
     };
