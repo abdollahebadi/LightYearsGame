@@ -32,7 +32,6 @@ LY::Actor::~Actor() {
 void LY::Actor::BeginActor() {
      LOG("Actor %s Started", actorUID.c_str());
 }
-
 void LY::Actor::BeginActorInternal() {
      if (!actorStarted) {
          actorStarted = true ;
@@ -40,7 +39,7 @@ void LY::Actor::BeginActorInternal() {
      }
 }
 
-void LY::Actor::ProgressActor(const float deltaTime) {
+void LY::Actor::Progress(const float deltaTime) {
    LOG("Actor %s progressing with frame rate: %f", actorUID.c_str() , (1.0f / deltaTime) ) ;
 }
 
@@ -49,8 +48,8 @@ void LY::Actor::CenterPivot() {
     acSprite.setOrigin({bounds.size.x / 2, bounds.size.y / 2}) ;
 }
 
-void LY::Actor::ProgressActorInternal(const float deltaTime) {
-    ProgressActor(deltaTime) ;
+void LY::Actor::ProgressInternal(const float deltaTime) {
+    Progress(deltaTime) ;
 }
 
 void LY::Actor::RenderActor(sf::RenderWindow &window) {
