@@ -23,6 +23,8 @@ namespace LY {
 
         void ConsumeInput() ;
 
+        void NormalizeInput() ;
+
         void Progress(float deltaTime) override ;
 
     } ;

@@ -1,6 +1,7 @@
 // In the name of Allah
 
 #include "player/PlayerSpaceship.h"
+#include "framework/MathUtils.h"
 
 LY::PlayerSpaceship::PlayerSpaceship(
     World *world,
@@ -36,11 +37,19 @@ void LY::PlayerSpaceship::HandleInput() {
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
         mMovement.y = +1 ;
     }
+
+    NormalizeInput() ;
+
 }
 
 void LY::PlayerSpaceship::ConsumeInput() {
     SetVelocity(mMovement * mSpeed) ;
     mMovement = sf::Vector2f(0,0) ;
+}
+
+void LY::PlayerSpaceship::NormalizeInput() {
+    NormalizeVector(mMovement) ;
+    LOG("Input normalized: %f , %f" , mMovement.x , mMovement.y) ;
 }
 
 void LY::PlayerSpaceship::Progress(const float deltaTime) {
