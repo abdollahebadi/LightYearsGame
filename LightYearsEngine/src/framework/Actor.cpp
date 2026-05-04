@@ -44,8 +44,8 @@ void LY::Actor::Progress(const float deltaTime) {
 }
 
 void LY::Actor::CenterPivot() {
-    const auto bounds = acSprite.getGlobalBounds() ;
-    acSprite.setOrigin({bounds.size.x / 2, bounds.size.y / 2}) ;
+    actorBounds = acSprite.getGlobalBounds() ;
+    acSprite.setOrigin({actorBounds.size.x / 2, actorBounds.size.y / 2}) ;
 }
 
 void LY::Actor::ProgressInternal(const float deltaTime) {
@@ -86,6 +86,10 @@ sf::Vector2f LY::Actor::GetActorForwardDirection() const {
 
 sf::Vector2f LY::Actor::GetActorRightDirection() const {
     return RotationToVector(GetActorRotationInDegrees() + 90.0f) ;
+}
+
+sf::FloatRect LY::Actor::GetActorBounds() const {
+    return actorBounds ;
 }
 
 

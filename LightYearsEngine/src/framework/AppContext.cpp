@@ -4,9 +4,10 @@
 #include "framework/Configs.h"
 
 
-void LY::AppContext::Init(const ENVIRONMENT env) {
+void LY::AppContext::Init(const ENVIRONMENT env, const unsigned int windowWidth, const unsigned int windowHeight) {
     currentEnvironment = env ;
     appContext = unique<AppContext>(new AppContext());
+    windowSize = sf::Vector2u(windowWidth, windowHeight) ;
     if (currentEnvironment == ENVIRONMENT::PROD) {
         _assetManager = std::make_unique<AssetManager>(env) ;
     }
@@ -19,4 +20,8 @@ LY::AssetManager &LY::AppContext::Assets() {
         throw std::runtime_error("AppContext not initialized. Please call AppContext::Init() first.") ;
     }
     return *_assetManager ;
+}
+
+sf::Vector2u LY::AppContext::getWindowSize() {
+    return windowSize ;
 }

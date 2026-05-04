@@ -25,6 +25,8 @@ namespace LY {
 
         void NormalizeInput() ;
 
+        void ClampInputToWindow() ;
+
         void Progress(float deltaTime) override ;
 
     } ;

@@ -23,7 +23,7 @@ LY::GameApplication::GameApplication(
     const std::uint32_t windowStyle,
     const float targetFrameRate) : Application(windowWidth, windowHeight, windowTitle, windowStyle, targetFrameRate) {
 
-    LY::AppContext::Init(ENVIRONMENT::PROD) ;
+    LY::AppContext::Init(ENVIRONMENT::PROD, windowWidth, windowHeight) ;
 
     const auto firstWorld = SpawnWorld<World>() ;
 

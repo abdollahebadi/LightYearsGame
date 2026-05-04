@@ -39,6 +39,8 @@ namespace LY {
 
         sf::Vector2f GetActorRightDirection() const ;
 
+        sf::FloatRect GetActorBounds() const ;
+
     protected:
         virtual void Progress(float deltaTime) ;
 
@@ -49,6 +51,8 @@ namespace LY {
 
         shared<sf::Texture> acTexture ;
         sf::Sprite acSprite ;
+
+        sf::FloatRect actorBounds ; ;
 
         virtual void BeginActor() ;
 

@@ -1,6 +1,8 @@
 // In the name of Allah
 
 #include "player/PlayerSpaceship.h"
+
+#include "framework/AppContext.h"
 #include "framework/MathUtils.h"
 
 LY::PlayerSpaceship::PlayerSpaceship(
@@ -39,6 +41,7 @@ void LY::PlayerSpaceship::HandleInput() {
     }
 
     NormalizeInput() ;
+    ClampInputToWindow() ;
 
 }
 
@@ -50,6 +53,30 @@ void LY::PlayerSpaceship::ConsumeInput() {
 void LY::PlayerSpaceship::NormalizeInput() {
     NormalizeVector(mMovement) ;
     LOG("Input normalized: %f , %f" , mMovement.x , mMovement.y) ;
+}
+
+void LY::PlayerSpaceship::ClampInputToWindow() {
+    const auto windowWidth = LY::AppContext::getWindowSize().x ;
+    const auto windowHeight = LY::AppContext::getWindowSize().y ;
+
+    const auto currentPosition = GetActorPosition() ;
+
+
+    if ( (currentPosition.x - GetActorBounds().size.x / 2) <= 0 && mMovement.x < 0) {
+        mMovement.x = 0.0f ;
+    }
+
+    if ( (currentPosition.y - GetActorBounds().size.y / 2) <= 0 && mMovement.y < 0) {
+        mMovement.y = 0.0f ;
+    }
+
+    if ( (currentPosition.x +  GetActorBounds().size.x / 2) >= windowWidth && mMovement.x >= 0) {
+        mMovement.x = 0.0f ;
+    }
+
+    if ( (currentPosition.y + GetActorBounds().size.y / 2) >= windowHeight && mMovement.y >= 0) {
+        mMovement.y = 0.0f ;
+    }
 }
 
 void LY::PlayerSpaceship::Progress(const float deltaTime) {

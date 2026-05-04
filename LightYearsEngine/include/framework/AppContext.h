@@ -10,9 +10,11 @@ namespace LY {
     class AppContext {
     public:
 
-        static void Init(ENVIRONMENT env) ;
+        static void Init(ENVIRONMENT env, unsigned int windowWidth, unsigned int windowHeight) ;
 
         static AssetManager& Assets() ;
+
+        static sf::Vector2u getWindowSize() ;
     private:
 
         AppContext() = default ;
@@ -22,6 +24,8 @@ namespace LY {
         inline static unique<AppContext> appContext ;
 
         inline static unique<AssetManager> _assetManager ;
+
+        inline static sf::Vector2u windowSize ;
 
     } ;
 }
