@@ -12,7 +12,18 @@ namespace LY {
 
         Shooter(Actor* owner) { owningActor = owner ; }
 
-        virtual void Shoot() = 0 ;
+        void Shoot() {
+            if (isCooledDown() && canShoot())
+                ShootImpl() ;
+        }
+
+        virtual void ShootImpl() = 0 ;
+
+        virtual bool isCooledDown() const = 0 ;
+
+        void setCanShoot(const bool state) { mCanShoot = state ; }
+
+        bool canShoot() const { return mCanShoot ;} ;
 
     // protected:
     //     virtual void Progress(float deltaTime) ;
@@ -21,6 +32,8 @@ namespace LY {
         // We can use a raw pointer here since the actor outlives the shooter and thus this raw pointer will not become
         // dangled.
         Actor* owningActor ;
+
+        bool mCanShoot = true ;
 
     } ;
 }

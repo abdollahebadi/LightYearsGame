@@ -4,7 +4,7 @@
 
 #include "framework/AppContext.h"
 #include "framework/MathUtils.h"
-#include "simpleshooter/SimpleShooter.h"
+#include "weapons/Bullet.h"
 
 LY::PlayerSpaceship::PlayerSpaceship(
     World *world,
@@ -14,7 +14,7 @@ LY::PlayerSpaceship::PlayerSpaceship(
     const float yInitPos): Spaceship(world, uid, texturePath, xInitPos, yInitPos), mSpeed(0) {
 
     // Start with a simple shooter for the spaceship.
-    currentShooter = std::make_shared<SimpleShooter>(this) ;
+    currentShooter = std::make_shared<Bullet>(this) ;
 
     SetSpeed(200.0f) ;
 }
