@@ -39,6 +39,10 @@ namespace LY {
 
         sf::Vector2f GetActorRightDirection() const ;
 
+        sf::FloatRect GetActorBounds() const ;
+
+    protected:
+        virtual void Progress(float deltaTime) ;
 
     private:
         World* owningWorld ;
@@ -48,8 +52,10 @@ namespace LY {
         shared<sf::Texture> acTexture ;
         sf::Sprite acSprite ;
 
+        sf::FloatRect actorBounds ; ;
+
         virtual void BeginActor() ;
-        virtual void Progress(float deltaTime) ;
+
 
         void CenterPivot() ;
     };
