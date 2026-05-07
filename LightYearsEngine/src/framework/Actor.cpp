@@ -40,7 +40,7 @@ void LY::Actor::BeginActorInternal() {
 }
 
 void LY::Actor::Progress(const float deltaTime) {
-   LOG("Actor %s progressing with frame rate: %f", actorUID.c_str() , (1.0f / deltaTime) ) ;
+   //LOG("Actor %s progressing with frame rate: %f", actorUID.c_str() , (1.0f / deltaTime) ) ;
 }
 
 void LY::Actor::CenterPivot() {

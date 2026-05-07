@@ -66,7 +66,7 @@ namespace LY {
     // Showcase functions implemented here, these must be implemented in the child classes later for the games, we are just
     // showing how they will be used here.
     void Application::Tick(const float deltaTime) {
-        LOG("The target frame rate is: %f and we get %f\n", mTargetFrameRate, (1.0f / deltaTime)) ;
+        //LOG("The target frame rate is: %f and we get %f\n", mTargetFrameRate, (1.0f / deltaTime)) ;
     }
 
     void Application::Render() {

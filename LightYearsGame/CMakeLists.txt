@@ -1,9 +1,10 @@
 # In the name of Allah
 
 add_executable(${LIGHT_YEARS_GAME_TARGET_NAME}
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/gameFramework/GameApplication.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/gameframework/GameApplication.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/spaceship/Spaceship.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/player/PlayerSpaceship.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/simpleshooter/SimpleShooter.cpp
 )
 
 target_include_directories(${LIGHT_YEARS_GAME_TARGET_NAME}

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "spaceship/Spaceship.h"
+#include "shooter/Shooter.h"
 
 namespace LY {
     class World ;
@@ -18,6 +19,8 @@ namespace LY {
         float mSpeed ;
 
         sf::Vector2f mMovement ;
+
+        shared<Shooter> currentShooter ;
 
         void HandleInput() ;
 

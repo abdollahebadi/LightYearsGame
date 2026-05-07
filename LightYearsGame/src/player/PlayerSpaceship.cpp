@@ -4,6 +4,7 @@
 
 #include "framework/AppContext.h"
 #include "framework/MathUtils.h"
+#include "simpleshooter/SimpleShooter.h"
 
 LY::PlayerSpaceship::PlayerSpaceship(
     World *world,
@@ -11,6 +12,10 @@ LY::PlayerSpaceship::PlayerSpaceship(
     const std::string &texturePath,
     const float xInitPos,
     const float yInitPos): Spaceship(world, uid, texturePath, xInitPos, yInitPos), mSpeed(0) {
+
+    // Start with a simple shooter for the spaceship.
+    currentShooter = std::make_shared<SimpleShooter>(this) ;
+
     SetSpeed(200.0f) ;
 }
 
@@ -40,6 +45,10 @@ void LY::PlayerSpaceship::HandleInput() {
         mMovement.y = +1 ;
     }
 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
+        currentShooter->Shoot() ;
+    }
+
     NormalizeInput() ;
     ClampInputToWindow() ;
 
@@ -52,7 +61,7 @@ void LY::PlayerSpaceship::ConsumeInput() {
 
 void LY::PlayerSpaceship::NormalizeInput() {
     NormalizeVector(mMovement) ;
-    LOG("Input normalized: %f , %f" , mMovement.x , mMovement.y) ;
+    //LOG("Input normalized: %f , %f" , mMovement.x , mMovement.y) ;
 }
 
 void LY::PlayerSpaceship::ClampInputToWindow() {

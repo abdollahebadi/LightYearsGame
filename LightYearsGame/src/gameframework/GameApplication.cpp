@@ -1,6 +1,6 @@
 // In the name of Allah
 
-#include "gameFramework/GameApplication.hpp"
+#include "gameframework/GameApplication.hpp"
 #include "framework/World.h"
 #include "framework/AppContext.h"
 #include "framework/Configs.h"
