@@ -6,10 +6,10 @@
 #include <SFML/System.hpp>
 
 namespace LY {
-    class Bullet : public Shooter {
+    class LaserGun : public Shooter {
 
     public:
-        Bullet(Actor* owner, float coolDownPeriod = 1.f) ;
+        LaserGun(Actor* owner, float coolDownPeriod = 1.f) ;
 
         void ShootImpl() override ;
 
