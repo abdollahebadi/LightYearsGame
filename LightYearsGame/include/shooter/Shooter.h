@@ -25,14 +25,14 @@ namespace LY {
 
         bool canShoot() const { return mCanShoot ;} ;
 
-    // protected:
-    //     virtual void Progress(float deltaTime) ;
-
-    private:
+    protected:
         // We can use a raw pointer here since the actor outlives the shooter and thus this raw pointer will not become
         // dangled.
         Actor* owningActor ;
 
+    //     virtual void Progress(float deltaTime) ;
+
+    private:
         bool mCanShoot = true ;
 
     } ;

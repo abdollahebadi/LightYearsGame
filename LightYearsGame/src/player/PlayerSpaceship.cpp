@@ -61,7 +61,6 @@ void LY::PlayerSpaceship::ConsumeInput() {
 
 void LY::PlayerSpaceship::NormalizeInput() {
     NormalizeVector(mMovement) ;
-    //LOG("Input normalized: %f , %f" , mMovement.x , mMovement.y) ;
 }
 
 void LY::PlayerSpaceship::ClampInputToWindow() {
@@ -92,7 +91,6 @@ void LY::PlayerSpaceship::Progress(const float deltaTime) {
     Spaceship::Progress(deltaTime) ;
     HandleInput() ;
     ConsumeInput() ;
-
 }
 
 

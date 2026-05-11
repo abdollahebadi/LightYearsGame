@@ -92,5 +92,9 @@ sf::FloatRect LY::Actor::GetActorBounds() const {
     return actorBounds ;
 }
 
+LY::World & LY::Actor::GetWorld() const {
+    return *owningWorld ;
+}
+
 
 

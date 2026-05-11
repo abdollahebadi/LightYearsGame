@@ -17,6 +17,5 @@ namespace LY {
     private:
         sf::Vector2f mVelocity;
 
-
     } ;
 }

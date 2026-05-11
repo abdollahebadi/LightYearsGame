@@ -15,6 +15,9 @@ namespace LY {
 
         float GetSpeed() const ;
 
+    protected:
+        void Progress(float deltaTime) override ;
+
     private:
         float mSpeed ;
 
@@ -29,9 +32,6 @@ namespace LY {
         void NormalizeInput() ;
 
         void ClampInputToWindow() ;
-
-        void Progress(float deltaTime) override ;
-
     } ;
 }
 

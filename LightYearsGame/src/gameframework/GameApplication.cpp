@@ -27,18 +27,6 @@ LY::GameApplication::GameApplication(
 
     const auto firstWorld = SpawnWorld<World>() ;
 
-    // firstWorld.lock()->SpawnActor<Actor>(
-    //     "1",
-    //     "assets/SpaceShooterRedux/PNG/playerShip1_blue.png",
-    //     100.0f,
-    //     100) ;
-    //
-    // firstWorld.lock()->SpawnActor<Actor>(
-    //     "2" ,
-    //     "assets/SpaceShooterRedux/PNG/playerShip1_green.png",
-    //     200.0f,
-    //     200.0f) ;
-
     firstWorld.lock()->SpawnActor<PlayerSpaceship>(
         "3" , "assets/SpaceShooterRedux/PNG/playerShip1_red.png" ,
         300 ,

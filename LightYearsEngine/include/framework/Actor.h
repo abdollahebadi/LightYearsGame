@@ -12,6 +12,14 @@ namespace LY {
 
     class World ;
 
+
+    /**
+    * The ACtor class wilL not have any movement related variable such as position or velocity.
+    * These physical attributes are delegated to each child class so that the mechanics can be different
+    * for each child that moves. In addition, Actor is a general base class that can encompass any object in the
+    * world from non-moving to moving and that is another reason that movement attributes are not implemented
+    * in this level but rather in the next level which are any children that require movement as their nature.
+    **/
     class Actor : public Object {
     public:
         Actor(World* owningWorld, std::string uid, const std::string& texturePath, float xInitPos, float yInitPos) ;
@@ -41,6 +49,8 @@ namespace LY {
 
         sf::FloatRect GetActorBounds() const ;
 
+        World& GetWorld() const ;
+
     protected:
         virtual void Progress(float deltaTime) ;
 
@@ -55,7 +65,6 @@ namespace LY {
         sf::FloatRect actorBounds ; ;
 
         virtual void BeginActor() ;
-
 
         void CenterPivot() ;
     };

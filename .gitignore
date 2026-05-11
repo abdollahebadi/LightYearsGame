@@ -3,5 +3,6 @@ cmake-build-debug/
 .idea/
 install/
 deps/
+Docs/
 CLAUDE.md
-ImportantThings.md
+

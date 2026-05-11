@@ -21,8 +21,8 @@ namespace LY {
 
         virtual ~World() ;
 
-        template <typename ActorType>
-        weak<ActorType> SpawnActor(std::string uid, std::string texturePath, float xInitPos, float yInitPos) ;
+        template <typename ActorType, typename ... Args>
+        weak<ActorType> SpawnActor(Args... args) ;
 
         void Render(sf::RenderWindow& window) ;
 
@@ -40,11 +40,11 @@ namespace LY {
         virtual void ProgressWorld(float deltaTime) ;
     } ;
 
-    template<typename ActorType>
-    weak<ActorType> World::SpawnActor(std::string uid, std::string texturePath, const float xInitPos , const float yInitPos) {
-        static_assert(std::is_base_of_v<Actor, ActorType>, "ActorType must derive from Actor");
-        shared<ActorType> newActor {new ActorType(this , uid, texturePath, xInitPos, yInitPos)} ;
-        pendingActors.push_back(newActor) ;
-        return newActor ;
+    template<typename ActorType, typename ... Args>
+    weak<ActorType> World::SpawnActor(Args... args) {
+            static_assert(std::is_base_of_v<Actor, ActorType>, "ActorType must derive from Actor");
+            shared<ActorType> newActor {new ActorType(this, args...)} ;
+            pendingActors.push_back(newActor) ;
+            return newActor ;
     }
 }
