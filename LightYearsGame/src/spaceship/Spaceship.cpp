@@ -6,19 +6,15 @@ LY::Spaceship::Spaceship(
     World *world, std::string uid,
     const std::string &texturePath,
     const float xInitPos,
-    const float yInitPos) : Actor(world, uid, texturePath, xInitPos, yInitPos) {
-
-    SetVelocity({ 0 , -100.0f}) ;
-}
+    const float yInitPos,
+    const sf::Vector2f initVelocity
+    ) : MovingActor(world, uid, texturePath, xInitPos, yInitPos, initVelocity) { }
 
 void LY::Spaceship::Progress(const float deltaTime) {
-    Actor::Progress(deltaTime) ;
-    SetActorPositionOffset(mVelocity * deltaTime) ;
+    MovingActor::Progress(deltaTime) ;
+    Move(deltaTime) ;
 }
 
-void LY::Spaceship::SetVelocity(const sf::Vector2f velocity) {
-    mVelocity = velocity;
-}
 
 
 

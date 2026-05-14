@@ -9,25 +9,27 @@ namespace LY {
     class World ;
     class PlayerSpaceship : public Spaceship {
     public:
-        PlayerSpaceship(World* world, std::string uid, const std::string& texturePath, float xInitPos, float yInitPos) ;
+        PlayerSpaceship(
+            World* world,
+            std::string uid,
+            const std::string& texturePath,
+            sf::Vector2f initVelocity,
+            float xInitPos,
+            float yInitPos
+            ) ;
 
-        void SetSpeed(float speed) ;
-
-        float GetSpeed() const ;
+        sf::Vector2f GetVelocity() const ;
 
     protected:
         void Progress(float deltaTime) override ;
 
     private:
-        float mSpeed ;
-
-        sf::Vector2f mMovement ;
 
         shared<Shooter> currentShooter ;
 
         void HandleInput() ;
 
-        void ConsumeInput() ;
+        void ConsumeInput(float deltaTime) ;
 
         void NormalizeInput() ;
 

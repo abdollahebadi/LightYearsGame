@@ -28,7 +28,9 @@ LY::GameApplication::GameApplication(
     const auto firstWorld = SpawnWorld<World>() ;
 
     firstWorld.lock()->SpawnActor<PlayerSpaceship>(
-        "3" , "assets/SpaceShooterRedux/PNG/playerShip1_red.png" ,
+        "3",
+        "assets/SpaceShooterRedux/PNG/playerShip1_red.png",
+        sf::Vector2f(200.0f, 200.0f),
         300 ,
         600) ;
 }

@@ -10,39 +10,41 @@ LY::PlayerSpaceship::PlayerSpaceship(
     World *world,
     const std::string uid,
     const std::string &texturePath,
+    const sf::Vector2f initVelocity,
     const float xInitPos,
-    const float yInitPos): Spaceship(world, uid, texturePath, xInitPos, yInitPos), mSpeed(0) {
+    const float yInitPos
+    ): Spaceship(
+        world,
+        uid,
+        texturePath,
+        xInitPos,
+        yInitPos,
+        initVelocity) {
 
     // Start with a simple shooter for the spaceship.
     currentShooter = std::make_shared<LaserGun>(this) ;
-
-    SetSpeed(200.0f) ;
 }
 
-void LY::PlayerSpaceship::SetSpeed(const float speed) {
-    mSpeed = speed ;
-}
-
-float LY::PlayerSpaceship::GetSpeed() const {
-    return mSpeed ;
+sf::Vector2f LY::PlayerSpaceship::GetVelocity() const {
+    return mVelocity ;
 }
 
 void LY::PlayerSpaceship::HandleInput() {
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
-        mMovement.x = -1 ;
+        mDirection.x = -1 ;
 
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
-        mMovement.x = +1 ;
+        mDirection.x = +1 ;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
-        mMovement.y = -1 ;
+        mDirection.y = -1 ;
     }
 
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
-        mMovement.y = +1 ;
+        mDirection.y = +1 ;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
@@ -54,13 +56,13 @@ void LY::PlayerSpaceship::HandleInput() {
 
 }
 
-void LY::PlayerSpaceship::ConsumeInput() {
-    SetVelocity(mMovement * mSpeed) ;
-    mMovement = sf::Vector2f(0,0) ;
+void LY::PlayerSpaceship::ConsumeInput(const float deltaTime) {
+    Spaceship::Move(deltaTime) ;
+    mDirection = { 0.f , 0.f } ;
 }
 
 void LY::PlayerSpaceship::NormalizeInput() {
-    NormalizeVector(mMovement) ;
+    NormalizeVector(mDirection) ;
 }
 
 void LY::PlayerSpaceship::ClampInputToWindow() {
@@ -70,27 +72,27 @@ void LY::PlayerSpaceship::ClampInputToWindow() {
     const auto currentPosition = GetActorPosition() ;
 
 
-    if ( (currentPosition.x - GetActorBounds().size.x / 2) <= 0 && mMovement.x < 0) {
-        mMovement.x = 0.0f ;
+    if ( (currentPosition.x - GetActorBounds().size.x / 2) <= 0 && mDirection.x < 0) {
+        mDirection.x = 0.0f ;
     }
 
-    if ( (currentPosition.y - GetActorBounds().size.y / 2) <= 0 && mMovement.y < 0) {
-        mMovement.y = 0.0f ;
+    if ( (currentPosition.y - GetActorBounds().size.y / 2) <= 0 && mDirection.y < 0) {
+        mDirection.y = 0.0f ;
     }
 
-    if ( (currentPosition.x +  GetActorBounds().size.x / 2) >= windowWidth && mMovement.x >= 0) {
-        mMovement.x = 0.0f ;
+    if ( (currentPosition.x +  GetActorBounds().size.x / 2) >= windowWidth && mDirection.x >= 0) {
+        mDirection.x = 0.0f ;
     }
 
-    if ( (currentPosition.y + GetActorBounds().size.y / 2) >= windowHeight && mMovement.y >= 0) {
-        mMovement.y = 0.0f ;
+    if ( (currentPosition.y + GetActorBounds().size.y / 2) >= windowHeight && mDirection.y >= 0) {
+        mDirection.y = 0.0f ;
     }
 }
 
 void LY::PlayerSpaceship::Progress(const float deltaTime) {
     Spaceship::Progress(deltaTime) ;
     HandleInput() ;
-    ConsumeInput() ;
+    ConsumeInput(deltaTime) ;
 }
 
 
