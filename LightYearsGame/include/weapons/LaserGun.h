@@ -9,7 +9,7 @@ namespace LY {
     class LaserGun : public Shooter {
 
     public:
-        LaserGun(Actor* owner, float coolDownPeriod = 1.f) ;
+        LaserGun(Actor* owner, float coolDownPeriod) ;
 
         void ShootImpl() override ;
 

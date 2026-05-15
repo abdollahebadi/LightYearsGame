@@ -30,8 +30,6 @@ namespace LY {
         // dangled.
         Actor* owningActor ;
 
-    //     virtual void Progress(float deltaTime) ;
-
     private:
         bool mCanShoot = true ;
 

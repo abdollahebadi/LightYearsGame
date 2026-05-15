@@ -21,8 +21,7 @@ LY::PlayerSpaceship::PlayerSpaceship(
         yInitPos,
         initVelocity) {
 
-    // Start with a simple shooter for the spaceship.
-    currentShooter = std::make_shared<LaserGun>(this) ;
+    currentShooter = std::make_shared<LaserGun>(this , LY::AppContext::laserGunConfig.coolDownPeriod) ;
 }
 
 sf::Vector2f LY::PlayerSpaceship::GetVelocity() const {

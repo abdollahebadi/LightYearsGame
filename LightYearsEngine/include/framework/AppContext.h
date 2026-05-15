@@ -8,15 +8,8 @@
 
 namespace LY {
     class AppContext {
-    public:
 
-        static void Init(ENVIRONMENT env, unsigned int windowWidth, unsigned int windowHeight) ;
-
-        static AssetManager& Assets() ;
-
-        static sf::Vector2u getWindowSize() ;
     private:
-
         AppContext() = default ;
 
         inline static ENVIRONMENT currentEnvironment ;
@@ -26,6 +19,27 @@ namespace LY {
         inline static unique<AssetManager> _assetManager ;
 
         inline static sf::Vector2u windowSize ;
+
+        struct ProjectileInitValues {
+            float initPosChange ;
+            sf::Vector2f initVelocity ;
+        };
+
+        struct LaserGunInitValues {
+            float coolDownPeriod ;
+        };
+
+    public:
+        inline static ProjectileInitValues projectileConfig { 2.0f , {0.f , 30.f} } ;
+
+        inline static LaserGunInitValues laserGunConfig {0.15 } ;
+
+        static void Init(ENVIRONMENT env, unsigned int windowWidth, unsigned int windowHeight) ;
+
+        static AssetManager& Assets() ;
+
+        static sf::Vector2u getWindowSize() ;
+
 
     } ;
 }

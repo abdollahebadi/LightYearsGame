@@ -1,29 +1,34 @@
 // In the name of Allah
 
 #include "weapons/LaserGun.h"
+
+#include "framework/AppContext.h"
 #include "framework/Core.h"
 #include "framework/World.h"
-#include "weapons/Bullet.h"
+#include "weapons/Projectile.h"
 
 
 LY::LaserGun::LaserGun(Actor *owner, const float coolDownPeriod) : Shooter(owner),
                                                                    coolDownClock {},
                                                                    coolDownTime(coolDownPeriod) {
-    LOG("Simple Shooter Created..!!") ;
+    LOG("Laser gun Created..!!") ;
 }
 
 void LY::LaserGun::ShootImpl() {
     coolDownClock.restart() ;
-    LOG("Shot by Simple Shooter") ;
+    //LOG("Laser gun shoots") ;
 
-    // need to spawn a new bullet here.
-    // owningActor->GetWorld().SpawnActor<Bullet>(
-    //     "1",
-    //     "assets/SpaceShooterRedux/PNG/Lasers/laserBlue01.png" ,
-    //     300,
-    //     600
-    //     ) ;
+    const auto x = owningActor->GetActorPosition() .x ;
+    const auto y = owningActor->GetActorPosition() .y - (owningActor->GetActorBounds().size.y) ;
 
+    //need to spawn a new bullet here.
+    auto ret = owningActor->GetWorld().SpawnActor<Projectile>(
+        "Laser",
+        "assets/SpaceShooterRedux/PNG/Lasers/laserBlue01.png",
+        LY::AppContext::projectileConfig.initVelocity,
+        x,
+        y
+        ) ;
 }
 
 bool LY::LaserGun::isCooledDown() const {

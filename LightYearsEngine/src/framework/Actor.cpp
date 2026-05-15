@@ -29,9 +29,8 @@ LY::Actor::~Actor() {
    LOG("Actor destroyed") ;
 }
 
-void LY::Actor::BeginActor() {
-     LOG("Actor %s Started", actorUID.c_str());
-}
+void LY::Actor::BeginActor() { }
+
 void LY::Actor::BeginActorInternal() {
      if (!actorStarted) {
          actorStarted = true ;
